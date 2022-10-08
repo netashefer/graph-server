@@ -14,6 +14,14 @@ class DashboardPermissionsService {
         ;`;
         await executeQuery(query);
     }
+
+    async deleteDashboardPermissions(dashboardId: string) {
+        const query = `
+        DELETE FROM ${DATABASE_NAME}."${this.tableName}"
+        WHERE "dashboardId" = '${dashboardId}'
+        ;`;
+        await executeQuery(query);
+    }
 }
 
 export const dashboardPermmisionsService = new DashboardPermissionsService();

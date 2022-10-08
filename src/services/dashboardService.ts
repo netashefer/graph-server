@@ -27,6 +27,14 @@ class DashboardService {
         ;`;
         return await executeQuery<Dashboard>(query);
     }
+
+    async deleteDashboard(dashboardId: string) {
+        const query = `
+        DELETE FROM ${DATABASE_NAME}."${this.tableName}"
+        WHERE "dashboardId" = '${dashboardId}'
+        ;`;
+        await executeQuery(query);
+    }
 }
 
 export const dashbaordService = new DashboardService();
