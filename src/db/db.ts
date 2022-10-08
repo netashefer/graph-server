@@ -12,7 +12,7 @@ export const client = new Client({
     }
 });
 
-async function dbconnector() {
+async function connectDB() {
     try {
         await client.connect();
         console.log("db connected succesfully");
@@ -20,4 +20,4 @@ async function dbconnector() {
         console.error("db connection failed", err);
     }
 }
-export default dbconnector;
+export default connectDB;

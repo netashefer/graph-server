@@ -28,7 +28,7 @@ router.post('/addPermissions', async (req, res) => {
 router.get('/:username', async (req, res) => {
     try {
         const { username } = req.params;
-        const dashboards = await dashbaordService.getUserDashboard(username);
+        const dashboards = await dashbaordService.getUserDashboards(username);
         res.status(200).send(dashboards);
     } catch (error) {
         res.status(400).send(error);

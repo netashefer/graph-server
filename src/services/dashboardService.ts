@@ -18,7 +18,7 @@ class DashboardService {
         return id;
     }
 
-    async getUserDashboard(username: string) {
+    async getUserDashboards(username: string) {
         const query = `
         SELECT d."dashboardId", d."dashboardName" FROM ${DATABASE_NAME}."${Tables.dashboardsPermissions}" p
         INNER JOIN ${DATABASE_NAME}."${this.tableName}" d
