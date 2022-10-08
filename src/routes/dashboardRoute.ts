@@ -46,4 +46,14 @@ router.delete('/delete/:dashboardId', async (req, res) => {
     }
 });
 
+router.get('/countOfUsers/:dashboardId', async (req, res) => {
+    try {
+        const { dashboardId } = req.params;
+        const count = await dashboardPermmisionsService.getCountOfUsers(dashboardId);
+        res.status(200).send(count);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 export default router;  
