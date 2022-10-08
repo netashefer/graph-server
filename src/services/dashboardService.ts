@@ -1,8 +1,8 @@
 
-import { DATABASE_NAME, Tables } from '../db/db.constants';
 import { v4 as uuid } from 'uuid';
+import { DATABASE_NAME, Tables } from '../db/db.constants';
 import { executeQuery } from '../db/queryExecuter';
-import { client } from '../db/db';
+import { Dashboard } from '../types/dashboard.types';
 
 class DashboardService {
     tableName = Tables.dashboards;
@@ -18,14 +18,15 @@ class DashboardService {
         return id;
     }
 
-    // async getDashboards(dataSoucreId: string) {
-    //     const query = `
-    //     SELECT FROM ${DATABASE_NAME}."${this.tableName} "dataTable""
-    //     WHERE dataSourceId = ${dataSoucreId}
-    //     ;`;
-    //     const rows = await executeQuery(client, query);
-    //     return JSON.parse(pako.inflate(rows, { to: 'string' }));;
-    // }
+    async getUserDashboard(username: string) {
+        const query = `
+        SELECT d."dashboardId", d."dashboardName" FROM ${DATABASE_NAME}."${Tables.dashboardsPermissions}" p
+        INNER JOIN ${DATABASE_NAME}."${this.tableName}" d
+        ON d."dashboardId" = p."dashboardId"
+        WHERE p."username" = '${username}'
+        ;`;
+        return await executeQuery<Dashboard>(query);
+    }
 }
 
 export const dashbaordService = new DashboardService();

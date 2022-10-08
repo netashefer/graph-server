@@ -1,5 +1,6 @@
 import { dashbaordService } from "../services/dashboardService";
 import express from 'express';
+import { dashboardPermmisionsService } from "../services/dashboardPermmisionsService";
 
 const router = express.Router();
 
@@ -13,8 +14,25 @@ router.post('/create', async (req, res) => {
     }
 });
 
-// router.get('/self', auth, (req, res) => {
-//     const { username, classification } = req.user;
-//     res.send({ username, classification });
-// });
+
+router.post('/addPermissions', async (req, res) => {
+    try {
+        const dashboardPermissions = req.body.dashboardPermissions;
+        await dashboardPermmisionsService.addDashboardPermission(dashboardPermissions);
+        res.status(200).send();
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+router.get('/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        const dashboards = await dashbaordService.getUserDashboard(username);
+        res.status(200).send(dashboards);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 export default router;  
