@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/signup', async (req, res) => {
     try {
         const {username, password} = req.body;
-        const id = await userService.createNewUser(username, password);
+        await userService.createNewUser(username, password);
         res.send(204);
     } catch (error) {
         res.status(400).send(error);
