@@ -1,6 +1,7 @@
-import { dashbaordService } from "../services/dashboardService";
 import express from 'express';
+import { verifyJwt } from '../auth/auth';
 import { dashboardPermmisionsService } from "../services/dashboardPermmisionsService";
+import { dashbaordService } from "../services/dashboardService";
 
 const router = express.Router();
 
@@ -46,7 +47,7 @@ router.delete('/delete/:dashboardId', async (req, res) => {
     }
 });
 
-router.get('/countOfUsers/:dashboardId', async (req, res) => {
+router.get('/countOfUsers/:dashboardId',  async (req, res) => {
     try {
         const { dashboardId } = req.params;
         const count = await dashboardPermmisionsService.getCountOfUsers(dashboardId);
