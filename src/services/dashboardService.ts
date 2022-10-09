@@ -35,6 +35,14 @@ class DashboardService {
         ;`;
         await executeQuery(query);
     }
+
+    async getDashboard(dashboardId: string) {
+        const query = `
+        SELECT * FROM ${DATABASE_NAME}."${this.tableName}"
+        WHERE "dashboardId" = '${dashboardId}'
+        ;`;
+        return (await executeQuery<Dashboard>(query))?.[0];
+    }
 }
 
 export const dashbaordService = new DashboardService();

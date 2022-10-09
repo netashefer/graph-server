@@ -56,4 +56,14 @@ router.get('/countOfUsers/:dashboardId', async (req, res) => {
     }
 });
 
+router.get('/dashboard/:dashboardId', async (req, res) => {
+    try {
+        const { dashboardId } = req.params;
+        const dashboard = await dashbaordService.getDashboard(dashboardId);
+        res.status(200).send(dashboard);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 export default router;  
