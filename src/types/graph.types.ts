@@ -3,7 +3,7 @@ export type GraphType = string; // for now
 export type Graph = {
     graphId: string;
     title: string;
-    type: GraphType;
+    template: { type: GraphType; };
     dataSourceId: string;
 };
 

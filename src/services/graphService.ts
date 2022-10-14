@@ -25,7 +25,7 @@ class GraphService {
         return rows.map(row => ({
             graphId: row.graphId,
             title: row.graphName,
-            type: row.graphTemplate?.type,
+            template: row.graphTemplate,
             dataSourceId: row.dataSourceId
         }));
     }
