@@ -4,6 +4,7 @@ import swaggerUi from "swagger-ui-express";
 import { config } from "./config";
 import connectDB from "./db/db";
 import dashboardRouter from "./routes/dashboardRoute";
+import widgetRouter from "./routes/widegtRoute";
 import graphRouter from "./routes/graphRoute";
 import bodyParser from "body-parser";
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json({ limit: "1mb" })); // 100kb default
 
 app.use("/dashboards", dashboardRouter);
 app.use("/graphs", graphRouter);
+app.use("/widgets", widgetRouter);
 
 // look for services inject
 // look for error middleware
