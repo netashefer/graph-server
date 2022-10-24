@@ -7,7 +7,7 @@ import { verifyJwt } from "./auth/auth";
 import { config } from "./config";
 import connectDB from "./db/db";
 import dashboardRouter from "./routes/dashboardRoute";
-import widgetRouter from "./routes/widegtRoute";
+import widgetRouter from "./routes/widgetRoute";
 import graphRouter from "./routes/graphRoute";
 const https = require('https');
 
@@ -19,14 +19,14 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "1mb" })); // 100kb default
 
-const key = fs.readFileSync(__dirname + '/cert.key',  'utf8');
-const cert = fs.readFileSync(__dirname + '/cert.crt',  'utf8');
+const key = fs.readFileSync(__dirname + '/cert.key', 'utf8');
+const cert = fs.readFileSync(__dirname + '/cert.crt', 'utf8');
 const options = {
-  key: key,
-  cert: cert
+    key: key,
+    cert: cert
 };
 
-app.use(verifyJwt)
+app.use(verifyJwt);
 app.use("/dashboards", dashboardRouter);
 app.use("/graphs", graphRouter);
 app.use("/widgets", widgetRouter);
