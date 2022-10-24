@@ -28,7 +28,6 @@ class DashboardPermissionsService {
         SELECT COUNT(DISTINCT "username") FROM ${DATABASE_NAME}."${this.tableName}"
         WHERE "dashboardId" = '${dashboardId}'
         ;`;
-        console.log(query);
         const rows = await executeQuery<{ count: number; }>(query);
         return rows?.length ? rows[0]?.count : 0;
     }
