@@ -26,7 +26,8 @@ class GraphService {
             graphId: row.graphId,
             title: row.graphName,
             template: row.graphTemplate,
-            dataSourceId: row.dataSourceId
+            dataSourceId: row.dataSourceId,
+            graphConfig: row.graphConfig
         }));
     }
 }
