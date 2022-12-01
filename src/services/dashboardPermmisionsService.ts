@@ -31,6 +31,22 @@ class DashboardPermissionsService {
         const rows = await executeQuery<{ count: number; }>(query);
         return rows?.length ? rows[0]?.count : 0;
     }
+
+    async addWatchedDashboard(dashboardId: string, username: string) {
+        const query = `
+        SELECT * FROM ${DATABASE_NAME}."${this.tableName}" 
+        WHERE "dashboardId" = '${dashboardId}' AND "username" = '${username}'
+        ;`;
+        const rows = await executeQuery(query);
+
+        if (!rows || !rows?.length) {
+            const query2 = `
+            INSERT INTO ${DATABASE_NAME}."${this.tableName}" ("dashboardId", "username")
+            VALUES ('${dashboardId}', '${username}')`;
+
+            await executeQuery(query2);
+        }
+    }
 }
 
 export const dashboardPermmisionsService = new DashboardPermissionsService();
