@@ -1,4 +1,5 @@
 
+import { v4 as uuid } from 'uuid';
 import { DATABASE_NAME, Tables } from '../db/db.constants';
 import { executeQuery } from '../db/queryExecuter';
 import { DashboardPermissions } from '../types/dashboard.types';
@@ -7,10 +8,11 @@ class DashboardPermissionsService {
     tableName = Tables.dashboardsPermissions;
 
     async addDashboardPermission(dashboardPermissions: DashboardPermissions) {
+		const id = uuid();
         const query = `
         INSERT INTO ${DATABASE_NAME}."${this.tableName}"
-        ("dashboardId", "username")
-        VALUES ('${dashboardPermissions.dashboardId}', '${dashboardPermissions.username}')
+        ("permissionId", "dashboardId", "username")
+        VALUES ('${id}','${dashboardPermissions.dashboardId}', '${dashboardPermissions.username}')
         ;`;
         await executeQuery(query);
     }
