@@ -1,4 +1,5 @@
 
+import _ from 'lodash';
 import { DATABASE_NAME, Tables } from '../db/db.constants';
 import { executeQuery } from '../db/queryExecuter';
 import { DashboardPermissions } from '../types/dashboard.types';
@@ -33,18 +34,18 @@ class DashboardPermissionsService {
     }
 
     async addWatchedDashboard(dashboardId: string, username: string) {
-        const query = `
+        const isPermissionExistQuery = `
         SELECT * FROM ${DATABASE_NAME}."${this.tableName}" 
         WHERE "dashboardId" = '${dashboardId}' AND "username" = '${username}'
         ;`;
-        const rows = await executeQuery(query);
+        const rows = await executeQuery(isPermissionExistQuery);
 
-        if (!rows || !rows?.length) {
-            const query2 = `
+        if (_.isEmpty(rows)) {
+            const insertPermissionQuery = `
             INSERT INTO ${DATABASE_NAME}."${this.tableName}" ("dashboardId", "username")
             VALUES ('${dashboardId}', '${username}')`;
 
-            await executeQuery(query2);
+            await executeQuery(insertPermissionQuery);
         }
     }
 }

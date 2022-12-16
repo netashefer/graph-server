@@ -67,7 +67,7 @@ router.get('/dashboard/:dashboardId', async (req, res) => {
     }
 });
 
-router.post('/watch', async (req, res) => {
+router.post('/watchedPermission', async (req, res) => {
     try {
         const dashboardPermissions = req.body.dashboardPermissions;
         await dashboardPermmisionsService.addWatchedDashboard(dashboardPermissions.dashboardId, dashboardPermissions.username);
