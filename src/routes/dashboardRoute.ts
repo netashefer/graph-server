@@ -47,7 +47,7 @@ router.delete('/delete/:dashboardId', async (req, res) => {
     }
 });
 
-router.get('/countOfUsers/:dashboardId',  async (req, res) => {
+router.get('/countOfUsers/:dashboardId', async (req, res) => {
     try {
         const { dashboardId } = req.params;
         const count = await dashboardPermmisionsService.getCountOfUsers(dashboardId);
@@ -62,6 +62,16 @@ router.get('/dashboard/:dashboardId', async (req, res) => {
         const { dashboardId } = req.params;
         const dashboard = await dashbaordService.getDashboard(dashboardId);
         res.status(200).send(dashboard);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+router.post('/watchedPermission', async (req, res) => {
+    try {
+        const dashboardPermissions = req.body.dashboardPermissions;
+        await dashboardPermmisionsService.addWatchedDashboard(dashboardPermissions.dashboardId, dashboardPermissions.username);
+        res.status(200).send();
     } catch (error) {
         res.status(400).send(error);
     }
