@@ -12,18 +12,11 @@ class GraphService {
 		INSERT INTO ${DATABASE_NAME}."${this.tableName}"(
 			"graphId", "dataSourceId", "graphConfig", "graphTemplate", "graphName")
 			VALUES ('${uuid()}', '${graph.dataSourceId}', '${JSON.stringify(graph.graphConfig)}', '${JSON.stringify(graph.template)}', '${graph.title}') 
-			RETURNING "graphId", "dataSourceId", "graphConfig", "graphTemplate", "graphName";
+			RETURNING "graphId";
 		`;
 		const row = await executeQuery<GraphInDB>(query);
-		const createdGraph = row[0];
 		
-		return {
-            graphId: createdGraph.graphId,
-            title: createdGraph.graphName,
-            template: createdGraph.graphTemplate,
-            dataSourceId: createdGraph.dataSourceId,
-            graphConfig: createdGraph.graphConfig
-        }
+		return row[0].graphId;
 	}
 
     async deleteGraph(graphId: string) {

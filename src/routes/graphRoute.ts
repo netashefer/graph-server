@@ -24,8 +24,8 @@ router.post('/create', async (req, res) => {
 			graphConfig,
 			template
 		};
-		const createdGraph = await graphService.createGraph(graph);
-		res.status(200).send(createdGraph);
+		const createdGraphId = await graphService.createGraph(graph);
+		res.status(200).send(createdGraphId);
 	} catch (error) {
 		res.status(400).send(error);
 	}
