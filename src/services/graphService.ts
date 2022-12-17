@@ -1,10 +1,30 @@
 
+import { v4 as uuid } from 'uuid';
 import { DATABASE_NAME, Tables } from '../db/db.constants';
 import { executeQuery } from '../db/queryExecuter';
 import { Graph, GraphInDB } from '../types/graph.types';
 
 class GraphService {
     tableName = Tables.graphs;
+
+	async createGraph(graph: Graph) {
+		const query = `
+		INSERT INTO ${DATABASE_NAME}."${this.tableName}"(
+			"graphId", "dataSourceId", "graphConfig", "graphTemplate", "graphName")
+			VALUES ('${uuid()}', '${graph.dataSourceId}', '${JSON.stringify(graph.graphConfig)}', '${JSON.stringify(graph.template)}', '${graph.title}') 
+			RETURNING "graphId", "dataSourceId", "graphConfig", "graphTemplate", "graphName";
+		`;
+		const row = await executeQuery<GraphInDB>(query);
+		const createdGraph = row[0];
+		
+		return {
+            graphId: createdGraph.graphId,
+            title: createdGraph.graphName,
+            template: createdGraph.graphTemplate,
+            dataSourceId: createdGraph.dataSourceId,
+            graphConfig: createdGraph.graphConfig
+        }
+	}
 
     async deleteGraph(graphId: string) {
         const query = `

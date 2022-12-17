@@ -7,7 +7,6 @@ router.get('/dashboard/:dashboardId', async (req, res) => {
     try {
         const { dashboardId } = req.params;
         const widgets = await widgetService.getDashboardWidgts(dashboardId);
-        console.log(widgets);
 
         res.status(200).send(widgets);
     } catch (error) {

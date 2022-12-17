@@ -1,5 +1,6 @@
 import express from 'express';
 import { graphService } from '../services/graphService';
+import { Graph } from '../types/graph.types';
 
 const router = express.Router();
 
@@ -12,6 +13,23 @@ router.get('/dashboard/:dashboardId', async (req, res) => {
         res.status(400).send(error);
     }
 });
+
+router.post('/create', async (req, res) => {
+	try {
+		const { graphId, title, dataSourceId, graphConfig, template} = req.body;
+		const graph: Graph = {
+			graphId,
+			title, 
+			dataSourceId,
+			graphConfig,
+			template
+		};
+		const createdGraph = await graphService.createGraph(graph);
+		res.status(200).send(createdGraph);
+	} catch (error) {
+		res.status(400).send(error);
+	}
+}); 
 
 router.delete('/:graphId', async (req, res) => {
     try {
