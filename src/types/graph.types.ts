@@ -5,7 +5,8 @@ export type Graph = {
     title: string;
     template: { type: GraphType; };
     dataSourceId: string;
-};
+	graphConfig: any;
+}
 
 export type GraphInDB = {
     graphId: string;
