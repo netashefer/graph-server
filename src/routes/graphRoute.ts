@@ -16,7 +16,7 @@ router.get('/dashboard/:dashboardId', async (req, res) => {
 
 router.post('/create', async (req, res) => {
 	try {
-		const { graphId, title, dataSourceId, graphConfig, template} = req.body;
+		const { graphId, title, dataSourceId, graphConfig, template } = req.body;
 		const graph: Graph = {
 			graphId,
 			title, 
