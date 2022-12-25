@@ -31,6 +31,24 @@ router.post('/create', async (req, res) => {
 	}
 }); 
 
+
+router.put('/edit', async (req, res) => {
+	try {
+		const { graphId, title, dataSourceId, graphConfig, template } = req.body;
+		const graph: Graph = {
+			graphId,
+			title, 
+			dataSourceId,
+			graphConfig,
+			template
+		};
+		await graphService.editGraph(graph);
+		res.status(200).send();
+	} catch (error) {
+		res.status(400).send(error);
+	}
+})
+
 router.delete('/:graphId', async (req, res) => {
     try {
         const { graphId } = req.params;
