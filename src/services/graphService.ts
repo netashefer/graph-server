@@ -19,6 +19,15 @@ class GraphService {
 		return row[0].graphId;
 	}
 
+	async editGraph(graph: Graph) {
+		const query = `UPDATE ${DATABASE_NAME}."${this.tableName}"
+		SET "dataSourceId"='${graph.dataSourceId}', "graphConfig"='${JSON.stringify(graph.graphConfig)}', "graphTemplate"='${JSON.stringify(graph.template)}', "graphName"='${graph.title}'
+		WHERE "graphId"='${graph.graphId}';
+		`;
+
+		await executeQuery<GraphInDB>(query);
+	}
+
     async deleteGraph(graphId: string) {
         const query = `
         DELETE FROM ${DATABASE_NAME}."${this.tableName}"
