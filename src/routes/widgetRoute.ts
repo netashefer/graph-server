@@ -34,4 +34,14 @@ router.delete('/:widgetId', async (req, res) => {
     }
 });
 
+router.post('/updateLayout', async (req, res) => {
+    try {
+        const { widgets } = req.body;
+        await widgetService.updateWidgetsLayout(widgets);
+        res.status(200).send("neta");
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 export default router;  

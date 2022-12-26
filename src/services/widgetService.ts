@@ -32,6 +32,20 @@ class WidgetService {
         ;`;
         await executeQuery(query);
     }
+
+    async updateWidgetsLayout(widgets: Widget[]) {
+        let query = '';
+        widgets.forEach(w => {
+            const widgetSetQuery = `
+            UPDATE ${DATABASE_NAME}."${this.tableName}"
+            SET "widgetProps" = '${JSON.stringify(w.widgetProps)}'
+            WHERE "widgetId" = '${w.widgetId}'
+            ;`;
+            query = query.concat(widgetSetQuery);
+        });
+
+        await executeQuery(query);
+    }
 }
 
 export const widgetService = new WidgetService();
