@@ -38,7 +38,7 @@ router.post('/updateLayout', async (req, res) => {
     try {
         const { widgets } = req.body;
         await widgetService.updateWidgetsLayout(widgets);
-        res.status(200).send("neta");
+        res.status(200).send();
     } catch (error) {
         res.status(400).send(error);
     }
