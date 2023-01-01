@@ -9,7 +9,7 @@ class DashboardPermissionsService {
     tableName = Tables.dashboardsPermissions;
 
     async addDashboardPermission(dashboardPermissions: DashboardPermissions) {
-		const id = uuid();
+        const id = uuid();
         const query = `
         INSERT INTO ${DATABASE_NAME}."${this.tableName}"
         ("permissionId", "dashboardId", "username")
@@ -44,8 +44,8 @@ class DashboardPermissionsService {
 
         if (_.isEmpty(rows)) {
             const insertPermissionQuery = `
-            INSERT INTO ${DATABASE_NAME}."${this.tableName}" ("dashboardId", "username")
-            VALUES ('${dashboardId}', '${username}')`;
+            INSERT INTO ${DATABASE_NAME}."${this.tableName}" ("permissionId", "dashboardId", "username")
+            VALUES ('${uuid()}', '${dashboardId}', '${username}')`;
 
             await executeQuery(insertPermissionQuery);
         }
