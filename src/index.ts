@@ -47,7 +47,7 @@ app.use( // look in the office
 // const server = https.createServer(options, app);
 
 connectDB().then(() => {
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log("Server is running on port", PORT);
     });
 });
