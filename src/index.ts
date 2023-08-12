@@ -19,12 +19,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "1mb" })); // 100kb default
 
-const key = fs.readFileSync(__dirname + '/cert.key', 'utf8');
-const cert = fs.readFileSync(__dirname + '/cert.crt', 'utf8');
-const options = {
-    key: key,
-    cert: cert
-};
+// const key = fs.readFileSync(__dirname + '/cert.key', 'utf8');
+// const cert = fs.readFileSync(__dirname + '/cert.crt', 'utf8');
+// const options = {
+//     key: key,
+//     cert: cert
+// };
 
 app.use(verifyJwt);
 app.use("/dashboards", dashboardRouter);
@@ -44,7 +44,7 @@ app.use( // look in the office
     })
 );
 
-const server = https.createServer(options, app);
+// const server = https.createServer(options, app);
 
 connectDB().then(() => {
     server.listen(PORT, () => {
