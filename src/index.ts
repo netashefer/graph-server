@@ -31,10 +31,7 @@ app.use("/dashboards", dashboardRouter);
 app.use("/graphs", graphRouter);
 app.use("/widgets", widgetRouter);
 
-// look for services inject
-// look for error middleware
-
-app.use( // look in the office
+app.use(
     "/docs",
     swaggerUi.serve,
     swaggerUi.setup(undefined, {
